@@ -20,6 +20,8 @@
 		void main()
 		{
 		    gl_Position = vec4(a_position.x, a_position.y, 0, 1);
+
+		    v_color = a_color;
 		}
 	</script>
 
@@ -28,8 +30,8 @@
 		varying vec4 v_color;
 		void main()
 		{
-			// gl_FragColor = v_color;
-		    gl_FragColor = vec4(1.0, 0.4, 0.0, 1.0 );
+			gl_FragColor = v_color;
+		    //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0 );
 		}
 	</script>
 
@@ -42,7 +44,7 @@
 		</div>
 		<div class="row">
 			<label class="slider-label">Line Color:</label>
-			<input type="color" id="html5colorpicker" class="form-control input-field" value="#ff0000">
+			<input type="color" id="color-picker" class="form-control input-field" value="#ff0000">
 		</div>
 		<div class="row">
 			<canvas id="gl-canvas" width="512" height="512" style="margin-top: 4px;">
