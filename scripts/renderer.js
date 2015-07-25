@@ -3,7 +3,9 @@
 var gl, 
     canvas,
     vIndex = 0,
-    vBuffer;
+    vBuffer,
+    drawingMode, 
+    curvesEnds = [];
 
 $(document).ready(function (){
     init();
@@ -30,18 +32,41 @@ function init () {
     gl.vertexAttribPointer(program.a_position, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(program.a_position);
 
-    $(canvas).on('click', onCanvasClick);
-
+    $(canvas).on('mousedown', onCanvasMouseDown)
+             .on('mousemove', onCanvasMouseMove);
+    $(document).on('mouseup', onDocumentMouseUp);
     render();
 };
 
-function onCanvasClick (event) {
+function onCanvasMouseDown () {
+    drawingMode = true;
+
+    addCurrentPotinToBuffer(event);
+}
+
+function onCanvasMouseMove (event) {
+    if(!drawingMode) return;
+
+    addCurrentPotinToBuffer(event);
+}
+
+function addCurrentPotinToBuffer (event) {
     var clickPosition = getGlVertexPosition(event, canvas);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
     gl.bufferSubData(gl.ARRAY_BUFFER, sizeof['vec2'] * vIndex, flatten(clickPosition));
     vIndex++;
     render();
+}
+
+function onDocumentMouseUp () {
+    drawingMode = false;
+
+    curvesEnds.push(vIndex);
+}
+
+function onCanvasClick (event) {
+
 }
 
 /**
@@ -75,9 +100,21 @@ function getGlVertexPosition (event, parentCanvas) {
 
 function render()
 {
+    console.log(curvesEnds);
+
     gl.clear( gl.COLOR_BUFFER_BIT ); 
 
-    if(vIndex != 0) {
-        gl.drawArrays(gl.LINE_STRIP, 0, vIndex);
-    }
+    if(vIndex <= 1) return;
+
+    var drawedElementsCount = 0;
+
+    for (var i = 0; i < curvesEnds.length; i++) {
+        var drawingCount = curvesEnds[i] - drawedElementsCount;
+        gl.drawArrays(gl.LINE_STRIP, drawedElementsCount, drawingCount);
+
+        drawedElementsCount += drawingCount;
+    };
+
+    gl.drawArrays(gl.LINE_STRIP, drawedElementsCount, vIndex - drawedElementsCount);
+
 }
