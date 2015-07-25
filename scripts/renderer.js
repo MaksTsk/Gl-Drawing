@@ -35,6 +35,7 @@ function init () {
     $(canvas).on('mousedown', onCanvasMouseDown)
              .on('mousemove', onCanvasMouseMove);
     $(document).on('mouseup', onDocumentMouseUp);
+    
     render();
 };
 

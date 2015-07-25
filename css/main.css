@@ -1,8 +1,10 @@
 .slider-label{
 	vertical-align: middle;
-	margin-left: 4px;
+	margin: 4px;
 }
 
-.slider{
+.input-field{
 	vertical-align: middle;
+	width: 150px;
+	margin: 4px;
 }
