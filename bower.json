@@ -1,0 +1,21 @@
+{
+  "name": "drawing",
+  "version": "0.0.0",
+  "homepage": "https://github.com/MaksTsk/Online-Drawing",
+  "authors": [
+    "Maksim Murygin <muriginm@gmail.com>"
+  ],
+  "description": "Simple drawing with WebGl",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
