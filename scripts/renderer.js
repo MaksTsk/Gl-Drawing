@@ -22,7 +22,7 @@ function init () {
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
-    gl.clearColor( 0, 0, 0, 1.0 );
+    gl.clearColor( 0.9, 0.9, 0.9, 1.0 );
 
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram(program);
