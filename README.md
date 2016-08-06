@@ -1,6 +1,3 @@
-# Online-Drawing
-Simple drawing with WebGL
-
 # Simple Drawing Exercise
 
 ### Life Demo
